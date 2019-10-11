@@ -18,7 +18,7 @@ using PcapDotNet.Packets.Transport;
 
 namespace PacketGenerator
 {
-    class Program
+    class PcapLib
     {
         /*
         
@@ -27,7 +27,7 @@ namespace PacketGenerator
         /// <summary>
         /// This function build an Ethernet with payload packet.
         /// </summary>
-        private static Packet BuildEthernetPacket()
+        public static Packet BuildEthernetPacket()
         {
             EthernetLayer ethernetLayer =
                 new EthernetLayer
@@ -51,7 +51,7 @@ namespace PacketGenerator
         /// <summary>
         /// This function build an ARP over Ethernet packet.
         /// </summary>
-        private static Packet BuildArpPacket()
+        public static Packet BuildArpPacket()
         {
             EthernetLayer ethernetLayer =
                 new EthernetLayer
@@ -80,7 +80,7 @@ namespace PacketGenerator
         /// <summary>
         /// This function build a VLanTaggedFrame over Ethernet with payload packet.
         /// </summary>
-        private static Packet BuildVLanTaggedFramePacket()
+        public static Packet BuildVLanTaggedFramePacket()
         {
             EthernetLayer ethernetLayer =
                 new EthernetLayer
@@ -113,7 +113,7 @@ namespace PacketGenerator
         /// <summary>
         /// This function build an IPv4 over Ethernet with payload packet.
         /// </summary>
-        private static Packet BuildIpV4Packet()
+        public static Packet BuildIpV4Packet()
         {
             EthernetLayer ethernetLayer =
                 new EthernetLayer
@@ -151,7 +151,7 @@ namespace PacketGenerator
         /// <summary>
         /// This function build an IPv6 over Ethernet with payload packet.
         /// </summary>
-        private static Packet BuildIpV6Packet()
+        public static Packet BuildIpV6Packet()
         {
             EthernetLayer ethernetLayer =
                 new EthernetLayer
@@ -185,7 +185,7 @@ namespace PacketGenerator
         /// <summary>
         /// This function build an ICMP over IPv4 over Ethernet packet.
         /// </summary>
-        private static Packet BuildIcmpPacket()
+        public static Packet BuildIcmpPacket()
         {
             EthernetLayer ethernetLayer =
                 new EthernetLayer
@@ -225,7 +225,7 @@ namespace PacketGenerator
         /// <summary>
         /// This function build an IGMP over IPv4 over Ethernet packet.
         /// </summary>
-        private static Packet BuildIgmpPacket()
+        public static Packet BuildIgmpPacket()
         {
             EthernetLayer ethernetLayer =
                 new EthernetLayer
@@ -263,7 +263,7 @@ namespace PacketGenerator
         /// <summary>
         /// This function build an IPv4 over GRE over IPv4 over Ethernet packet.
         /// </summary>
-        private static Packet BuildGrePacket()
+        public static Packet BuildGrePacket()
         {
             EthernetLayer ethernetLayer =
                 new EthernetLayer
@@ -326,7 +326,7 @@ namespace PacketGenerator
         /// <summary>
         /// This function build an UDP over IPv4 over Ethernet with payload packet.
         /// </summary>
-        private static Packet BuildUdpPacket()
+        public static Packet BuildUdpPacket()
         {
             EthernetLayer ethernetLayer =
                 new EthernetLayer
@@ -373,7 +373,7 @@ namespace PacketGenerator
         /// <summary>
         /// This function build an TCP over IPv4 over Ethernet with payload packet.
         /// </summary>
-        private static Packet BuildTcpPacket()
+        public static Packet BuildTcpPacket()
         {
             EthernetLayer ethernetLayer =
                 new EthernetLayer
@@ -425,7 +425,7 @@ namespace PacketGenerator
         /// <summary>
         /// This function build a DNS over UDP over IPv4 over Ethernet packet.
         /// </summary>
-        private static Packet BuildDnsPacket()
+        public static Packet BuildDnsPacket()
         {
             EthernetLayer ethernetLayer =
                 new EthernetLayer
@@ -492,7 +492,7 @@ namespace PacketGenerator
         /// <summary>
         /// This function build an HTTP over TCP over IPv4 over Ethernet packet.
         /// </summary>
-        private static Packet BuildHttpPacket()
+        public static Packet BuildHttpPacket()
         {
             EthernetLayer ethernetLayer =
                 new EthernetLayer
@@ -548,7 +548,7 @@ namespace PacketGenerator
         /// <summary>
         /// This function build a DNS over UDP over IPv4 over GRE over IPv4 over IPv4 over VLAN Tagged Frame over VLAN Tagged Frame over Ethernet.
         /// </summary>
-        private static Packet BuildComplexPacket()
+        public static Packet BuildComplexPacket()
         {
             return PacketBuilder.Build(
                 DateTime.Now,

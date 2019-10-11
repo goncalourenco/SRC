@@ -30,6 +30,7 @@
         {
             this.listDevices = new System.Windows.Forms.ListBox();
             this.btnListDevices = new System.Windows.Forms.Button();
+            this.btnSendPackets = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listDevices
@@ -37,24 +38,35 @@
             this.listDevices.FormattingEnabled = true;
             this.listDevices.Location = new System.Drawing.Point(142, 12);
             this.listDevices.Name = "listDevices";
-            this.listDevices.Size = new System.Drawing.Size(590, 108);
+            this.listDevices.Size = new System.Drawing.Size(646, 95);
             this.listDevices.TabIndex = 0;
             // 
             // btnListDevices
             // 
             this.btnListDevices.Location = new System.Drawing.Point(13, 13);
             this.btnListDevices.Name = "btnListDevices";
-            this.btnListDevices.Size = new System.Drawing.Size(123, 35);
+            this.btnListDevices.Size = new System.Drawing.Size(123, 42);
             this.btnListDevices.TabIndex = 1;
             this.btnListDevices.Text = "List Devices";
             this.btnListDevices.UseVisualStyleBackColor = true;
             this.btnListDevices.Click += new System.EventHandler(this.btnListDevices_Click);
+            // 
+            // btnSendPackets
+            // 
+            this.btnSendPackets.Location = new System.Drawing.Point(13, 61);
+            this.btnSendPackets.Name = "btnSendPackets";
+            this.btnSendPackets.Size = new System.Drawing.Size(123, 46);
+            this.btnSendPackets.TabIndex = 2;
+            this.btnSendPackets.Text = "Send Packets";
+            this.btnSendPackets.UseVisualStyleBackColor = true;
+            this.btnSendPackets.Click += new System.EventHandler(this.btnSendPackets_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnSendPackets);
             this.Controls.Add(this.btnListDevices);
             this.Controls.Add(this.listDevices);
             this.Name = "MainForm";
@@ -67,6 +79,7 @@
 
         private System.Windows.Forms.ListBox listDevices;
         private System.Windows.Forms.Button btnListDevices;
+        private System.Windows.Forms.Button btnSendPackets;
     }
 }
 
