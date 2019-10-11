@@ -1,0 +1,16 @@
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\bin\Debug\netcoreapp3.0\PacketGenerator.exe
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\obj\Debug\netcoreapp3.0\PacketGenerator.csprojAssemblyReference.cache
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\obj\Debug\netcoreapp3.0\PacketGenerator.AssemblyInfoInputs.cache
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\obj\Debug\netcoreapp3.0\PacketGenerator.AssemblyInfo.cs
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\bin\Debug\netcoreapp3.0\PacketGenerator.deps.json
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\bin\Debug\netcoreapp3.0\PacketGenerator.runtimeconfig.json
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\bin\Debug\netcoreapp3.0\PacketGenerator.runtimeconfig.dev.json
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\bin\Debug\netcoreapp3.0\PacketGenerator.dll
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\bin\Debug\netcoreapp3.0\PacketGenerator.pdb
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\bin\Debug\netcoreapp3.0\PcapDotNet.Base.dll
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\bin\Debug\netcoreapp3.0\PcapDotNet.Core.Extensions.dll
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\bin\Debug\netcoreapp3.0\PcapDotNet.Core.dll
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\bin\Debug\netcoreapp3.0\PcapDotNet.Packets.dll
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\obj\Debug\netcoreapp3.0\PacketGenerator.csproj.CopyComplete
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\obj\Debug\netcoreapp3.0\PacketGenerator.dll
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\PacketGenerator\PacketGenerator\obj\Debug\netcoreapp3.0\PacketGenerator.pdb
