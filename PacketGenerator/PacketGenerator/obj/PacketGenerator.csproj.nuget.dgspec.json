@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nekki\\Desktop\\Aulas\\Seg Redes\\SRC\\PacketGenerator\\PacketGenerator\\PacketGenerator.csproj": {}
+    "C:\\Users\\Nekki\\Desktop\\Aulas\\Seg Redes\\SRC\\SRC\\PacketGenerator\\PacketGenerator\\PacketGenerator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nekki\\Desktop\\Aulas\\Seg Redes\\SRC\\PacketGenerator\\PacketGenerator\\PacketGenerator.csproj": {
+    "C:\\Users\\Nekki\\Desktop\\Aulas\\Seg Redes\\SRC\\SRC\\PacketGenerator\\PacketGenerator\\PacketGenerator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nekki\\Desktop\\Aulas\\Seg Redes\\SRC\\PacketGenerator\\PacketGenerator\\PacketGenerator.csproj",
+        "projectUniqueName": "C:\\Users\\Nekki\\Desktop\\Aulas\\Seg Redes\\SRC\\SRC\\PacketGenerator\\PacketGenerator\\PacketGenerator.csproj",
         "projectName": "PacketGenerator",
-        "projectPath": "C:\\Users\\Nekki\\Desktop\\Aulas\\Seg Redes\\SRC\\PacketGenerator\\PacketGenerator\\PacketGenerator.csproj",
+        "projectPath": "C:\\Users\\Nekki\\Desktop\\Aulas\\Seg Redes\\SRC\\SRC\\PacketGenerator\\PacketGenerator\\PacketGenerator.csproj",
         "packagesPath": "C:\\Users\\Nekki\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nekki\\Desktop\\Aulas\\Seg Redes\\SRC\\PacketGenerator\\PacketGenerator\\obj\\",
+        "outputPath": "C:\\Users\\Nekki\\Desktop\\Aulas\\Seg Redes\\SRC\\SRC\\PacketGenerator\\PacketGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Nekki\\AppData\\Roaming\\NuGet\\NuGet.Config",
