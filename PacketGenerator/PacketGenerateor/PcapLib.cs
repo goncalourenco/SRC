@@ -47,7 +47,26 @@ namespace PacketGenerator
 
             return builder.Build(DateTime.Now);
         }
+        public static Packet BuildEthernetPacket(String sourceMac, String destinationMac)
+        {
+            EthernetLayer ethernetLayer =
+                new EthernetLayer
+                {
+                    Source = new MacAddress(sourceMac),
+                    Destination = new MacAddress(destinationMac),
+                    EtherType = EthernetType.IpV4,
+                };
 
+            PayloadLayer payloadLayer =
+                new PayloadLayer
+                {
+                    Data = new Datagram(Encoding.ASCII.GetBytes("hello world")),
+                };
+
+            PacketBuilder builder = new PacketBuilder(ethernetLayer, payloadLayer);
+
+            return builder.Build(DateTime.Now);
+        }
         /// <summary>
         /// This function build an ARP over Ethernet packet.
         /// </summary>
@@ -86,7 +105,7 @@ namespace PacketGenerator
                 new EthernetLayer
                 {
                     Source = new MacAddress("01:01:01:01:01:01"),
-                    Destination = new MacAddress("02:02:02:02:02:02"),
+                    Destination = new MacAddress("F4:06:69:06:DC:EF"),
                     EtherType = EthernetType.None, // Will be filled automatically.
                 };
 
