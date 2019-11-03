@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
 using PacketGenerator;
+using PcapDotNet.Base;
 using PcapDotNet.Core;
 using PcapDotNet.Packets;
+using PcapDotNet.Packets.Arp;
 using PcapDotNet.Packets.Ethernet;
 using PcapDotNet.Packets.Icmp;
 using PcapDotNet.Packets.IpV4;
@@ -19,12 +22,26 @@ namespace PacketGenerateor
         private List<Button> transport;
         private List<Button> applications;
         private PacketDevice selectedDevice;
+        private List<Object> packetLayers;
         public MainForm()
         {
+            packetLayers = new List<object>();
             InitializeComponent();
             fillNetworkList();
             fillTransportList();
             fillApplicationList();
+            addEthernetLayer();
+        }
+
+        private void addEthernetLayer()
+        {
+            EthernetLayer ethernetLayer = new EthernetLayer
+            {
+                Source = new MacAddress(ethSourceAddr.Text),
+                Destination = new MacAddress(ethDestAddr.Text)
+            };
+            packetLayers.Add(ethernetLayer);
+            listPacketLayers.Items.Add("ETH -> " + ethernetLayer.ToString());
         }
 
         private void fillApplicationList()
@@ -100,7 +117,7 @@ namespace PacketGenerateor
                 // IPv4 Layer
                 IpV4Layer ipV4Layer = new IpV4Layer
                 {
-                    Source = new IpV4Address("10.20.228.59"),
+                    Source = new IpV4Address("10.20.228.173"),
                     Ttl = 128,
                     // The rest of the important parameters will be set for each packet
                 };
@@ -115,7 +132,7 @@ namespace PacketGenerateor
                 for (int i = 0; i != 100; ++i)
                 {
                     // Set IPv4 parameters
-                    ipV4Layer.CurrentDestination = new IpV4Address("10.20.229.106");
+                    ipV4Layer.CurrentDestination = new IpV4Address("10.20.229.46");
                     ipV4Layer.Identification = (ushort)i;
 
                     // Set ICMP parameters
@@ -126,9 +143,13 @@ namespace PacketGenerateor
                     Packet packet = builder.Build(DateTime.Now);
 
                     // Send down the packet
-                    communicator.SendPacket(packet);
+                    /*
+                    while (true)
+                    {
+                        communicator.SendPacket(packet);
+                    }*/
                 }
-                /*
+                
                 communicator.SendPacket(PcapLib.BuildEthernetPacket());
                 communicator.SendPacket(PcapLib.BuildArpPacket());
                 communicator.SendPacket(PcapLib.BuildVLanTaggedFramePacket());
@@ -141,13 +162,14 @@ namespace PacketGenerateor
                 communicator.SendPacket(PcapLib.BuildTcpPacket());
                 communicator.SendPacket(PcapLib.BuildDnsPacket());
                 communicator.SendPacket(PcapLib.BuildHttpPacket());
-                communicator.SendPacket(PcapLib.BuildComplexPacket());*/
+                communicator.SendPacket(PcapLib.BuildComplexPacket());
             }
         }
 
         private void btnIPV4_Click(object sender, EventArgs e)
         {
             disableButtons(sender);
+
         }
 
         private void disableButtons(object sender)
@@ -253,6 +275,7 @@ namespace PacketGenerateor
             {
                 sourceHardwareAddr.Text = getMACAddress();
             }
+            ethSourceAddr.Text = getMACAddress();
         }
 
         private void btnARP_Click(object sender, EventArgs e)
@@ -277,6 +300,7 @@ namespace PacketGenerateor
                 {
                     l.Visible = true;
                 }
+                btnAddDataLink.Visible = true;
             }
             else
             {
@@ -288,14 +312,22 @@ namespace PacketGenerateor
                 {
                     l.Visible = false;
                 }
+                btnAddDataLink.Visible = false;
+
             }
             sourceHardwareAddr.Text = getMACAddress();
+            sourceProtocolAddr.Text = "192.168.1.74";
+            destProtocolAddr.Text = "192.168.1.47";
+            destHardwareAddr.Text = sourceHardwareAddr.Text;
 
         }
 
         private string getMACAddress()
         {
-
+            if(selectedDevice == null)
+            {
+                return string.Empty;
+            }
             foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
             {
                 if (ni.Id.Equals("{" + selectedDevice.Name.Split('{')[1]))
@@ -318,7 +350,45 @@ namespace PacketGenerateor
             return string.Empty;
         }
 
+        private void btnAddDataLink_Click(object sender, EventArgs e)
+        {
+            ArpLayer arpLayer =
+                new ArpLayer
+                {
+                    ProtocolType = EthernetType.IpV4,
+                    Operation = ArpOperation.Request,
+                    //SenderHardwareAddress = new byte[] { 3, 3, 3, 3, 3, 3 }.AsReadOnly(), // 03:03:03:03:03:03.
+                    SenderHardwareAddress = sourceHardwareAddr.Text.Split(':').Select(x => Convert.ToByte(x, 16)).ToArray().AsReadOnly(), // 03:03:03:03:03:03.
+                    //SenderProtocolAddress = new byte[] { 1, 2, 3, 4 }.AsReadOnly(), // 1.2.3.4.
+                    SenderProtocolAddress = IPAddress.Parse(sourceProtocolAddr.Text).GetAddressBytes().AsReadOnly(), // 1.2.3.4.
+                    //TargetHardwareAddress = new byte[] { 4, 4, 4, 4, 4, 4 }.AsReadOnly(), // 04:04:04:04:04:04.
+                    TargetHardwareAddress = destHardwareAddr.Text.Split(':').Select(x => Convert.ToByte(x, 16)).ToArray().AsReadOnly(), // 04:04:04:04:04:04.
+                    //TargetProtocolAddress = new byte[] { 11, 22, 33, 44 }.AsReadOnly(), // 11.22.33.44.
+                    TargetProtocolAddress = IPAddress.Parse(destProtocolAddr.Text).GetAddressBytes().AsReadOnly(), // 11.22.33.44.
+                };
+            packetLayers.Add(arpLayer);
+            listPacketLayers.Items.Add("ARP -> " + sourceProtocolAddr.Text + " -> " + destProtocolAddr.Text);
 
+        }
+
+        private void btnSetEthernet_Click(object sender, EventArgs e)
+        {
+            EthernetLayer ethernetLayer = new EthernetLayer
+            {
+                Source = new MacAddress(ethSourceAddr.Text),
+                Destination = new MacAddress(ethDestAddr.Text)
+            };
+            packetLayers[0] = ethernetLayer;
+            listPacketLayers.Items[0] = ("ETH -> " + ethernetLayer.ToString());
+        }
+
+        private void btnRemovePacketLayer_Click(object sender, EventArgs e)
+        {
+            if(listPacketLayers.SelectedIndex > 0)
+            {
+                listPacketLayers.Items.RemoveAt(listPacketLayers.SelectedIndex);
+            }
+        }
     }
 
 }

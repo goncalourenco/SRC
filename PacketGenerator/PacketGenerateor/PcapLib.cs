@@ -20,6 +20,10 @@ namespace PacketGenerator
 {
     class PcapLib
     {
+        private static string macAddressSource = "30:3A:64:69:70:FD";
+        private static string macAddressDest = "F4:06:69:06:DC:EF";
+        private static string ipSource = "10.20.228.173";
+        private static string ipDest = "10.20.229.46";
         /*
         
 
@@ -32,8 +36,8 @@ namespace PacketGenerator
             EthernetLayer ethernetLayer =
                 new EthernetLayer
                 {
-                    Source = new MacAddress("01:01:01:01:01:01"),
-                    Destination = new MacAddress("02:02:02:02:02:02"),
+                    Source = new MacAddress(macAddressSource),
+                    Destination = new MacAddress(macAddressDest),
                     EtherType = EthernetType.IpV4,
                 };
 
@@ -75,8 +79,8 @@ namespace PacketGenerator
             EthernetLayer ethernetLayer =
                 new EthernetLayer
                 {
-                    Source = new MacAddress("01:01:01:01:01:01"),
-                    Destination = new MacAddress("02:02:02:02:02:02"),
+                    Source = new MacAddress(macAddressSource),
+                    Destination = new MacAddress(macAddressDest),
                     EtherType = EthernetType.None, // Will be filled automatically.
                 };
 
@@ -104,7 +108,7 @@ namespace PacketGenerator
             EthernetLayer ethernetLayer =
                 new EthernetLayer
                 {
-                    Source = new MacAddress("01:01:01:01:01:01"),
+                    Source = new MacAddress(macAddressSource),
                     Destination = new MacAddress("F4:06:69:06:DC:EF"),
                     EtherType = EthernetType.None, // Will be filled automatically.
                 };
@@ -137,16 +141,16 @@ namespace PacketGenerator
             EthernetLayer ethernetLayer =
                 new EthernetLayer
                 {
-                    Source = new MacAddress("01:01:01:01:01:01"),
-                    Destination = new MacAddress("02:02:02:02:02:02"),
+                    Source = new MacAddress(macAddressSource),
+                    Destination = new MacAddress(macAddressDest),
                     EtherType = EthernetType.None,
                 };
 
             IpV4Layer ipV4Layer =
                 new IpV4Layer
                 {
-                    Source = new IpV4Address("1.2.3.4"),
-                    CurrentDestination = new IpV4Address("11.22.33.44"),
+                    Source = new IpV4Address(ipSource),
+                    CurrentDestination = new IpV4Address(ipDest),
                     Fragmentation = IpV4Fragmentation.None,
                     HeaderChecksum = null, // Will be filled automatically.
                     Identification = 123,
@@ -175,8 +179,8 @@ namespace PacketGenerator
             EthernetLayer ethernetLayer =
                 new EthernetLayer
                 {
-                    Source = new MacAddress("01:01:01:01:01:01"),
-                    Destination = new MacAddress("02:02:02:02:02:02"),
+                    Source = new MacAddress(macAddressSource),
+                    Destination = new MacAddress(macAddressDest),
                     EtherType = EthernetType.None,
                 };
 
@@ -209,16 +213,16 @@ namespace PacketGenerator
             EthernetLayer ethernetLayer =
                 new EthernetLayer
                 {
-                    Source = new MacAddress("01:01:01:01:01:01"),
-                    Destination = new MacAddress("02:02:02:02:02:02"),
+                    Source = new MacAddress(macAddressSource),
+                    Destination = new MacAddress(macAddressDest),
                     EtherType = EthernetType.None, // Will be filled automatically.
                 };
 
             IpV4Layer ipV4Layer =
                 new IpV4Layer
                 {
-                    Source = new IpV4Address("1.2.3.4"),
-                    CurrentDestination = new IpV4Address("11.22.33.44"),
+                    Source = new IpV4Address(ipSource),
+                    CurrentDestination = new IpV4Address(ipDest),
                     Fragmentation = IpV4Fragmentation.None,
                     HeaderChecksum = null, // Will be filled automatically.
                     Identification = 123,
@@ -249,16 +253,16 @@ namespace PacketGenerator
             EthernetLayer ethernetLayer =
                 new EthernetLayer
                 {
-                    Source = new MacAddress("01:01:01:01:01:01"),
-                    Destination = new MacAddress("02:02:02:02:02:02"),
+                    Source = new MacAddress(macAddressSource),
+                    Destination = new MacAddress(macAddressDest),
                     EtherType = EthernetType.None, // Will be filled automatically.
                 };
 
             IpV4Layer ipV4Layer =
                 new IpV4Layer
                 {
-                    Source = new IpV4Address("1.2.3.4"),
-                    CurrentDestination = new IpV4Address("11.22.33.44"),
+                    Source = new IpV4Address(ipSource),
+                    CurrentDestination = new IpV4Address(ipDest),
                     Fragmentation = IpV4Fragmentation.None,
                     HeaderChecksum = null, // Will be filled automatically.
                     Identification = 123,
@@ -271,7 +275,7 @@ namespace PacketGenerator
             IgmpQueryVersion1Layer igmpLayer =
                 new IgmpQueryVersion1Layer
                 {
-                    GroupAddress = new IpV4Address("1.2.3.4"),
+                    GroupAddress = new IpV4Address(ipSource),
                 };
 
             PacketBuilder builder = new PacketBuilder(ethernetLayer, ipV4Layer, igmpLayer);
@@ -287,16 +291,16 @@ namespace PacketGenerator
             EthernetLayer ethernetLayer =
                 new EthernetLayer
                 {
-                    Source = new MacAddress("01:01:01:01:01:01"),
-                    Destination = new MacAddress("02:02:02:02:02:02"),
+                    Source = new MacAddress(macAddressSource),
+                    Destination = new MacAddress(macAddressDest),
                     EtherType = EthernetType.None, // Will be filled automatically.
                 };
 
             IpV4Layer ipV4Layer =
                 new IpV4Layer
                 {
-                    Source = new IpV4Address("1.2.3.4"),
-                    CurrentDestination = new IpV4Address("11.22.33.44"),
+                    Source = new IpV4Address(ipSource),
+                    CurrentDestination = new IpV4Address(ipDest),
                     Fragmentation = IpV4Fragmentation.None,
                     HeaderChecksum = null, // Will be filled automatically.
                     Identification = 123,
@@ -350,16 +354,16 @@ namespace PacketGenerator
             EthernetLayer ethernetLayer =
                 new EthernetLayer
                 {
-                    Source = new MacAddress("01:01:01:01:01:01"),
-                    Destination = new MacAddress("02:02:02:02:02:02"),
+                    Source = new MacAddress(macAddressSource),
+                    Destination = new MacAddress(macAddressDest),
                     EtherType = EthernetType.None, // Will be filled automatically.
                 };
 
             IpV4Layer ipV4Layer =
                 new IpV4Layer
                 {
-                    Source = new IpV4Address("1.2.3.4"),
-                    CurrentDestination = new IpV4Address("11.22.33.44"),
+                    Source = new IpV4Address(ipSource),
+                    CurrentDestination = new IpV4Address(ipDest),
                     Fragmentation = IpV4Fragmentation.None,
                     HeaderChecksum = null, // Will be filled automatically.
                     Identification = 123,
@@ -397,16 +401,16 @@ namespace PacketGenerator
             EthernetLayer ethernetLayer =
                 new EthernetLayer
                 {
-                    Source = new MacAddress("01:01:01:01:01:01"),
-                    Destination = new MacAddress("02:02:02:02:02:02"),
+                    Source = new MacAddress(macAddressSource),
+                    Destination = new MacAddress(macAddressDest),
                     EtherType = EthernetType.None, // Will be filled automatically.
                 };
 
             IpV4Layer ipV4Layer =
                 new IpV4Layer
                 {
-                    Source = new IpV4Address("1.2.3.4"),
-                    CurrentDestination = new IpV4Address("11.22.33.44"),
+                    Source = new IpV4Address(ipSource),
+                    CurrentDestination = new IpV4Address(ipDest),
                     Fragmentation = IpV4Fragmentation.None,
                     HeaderChecksum = null, // Will be filled automatically.
                     Identification = 123,
@@ -449,16 +453,16 @@ namespace PacketGenerator
             EthernetLayer ethernetLayer =
                 new EthernetLayer
                 {
-                    Source = new MacAddress("01:01:01:01:01:01"),
-                    Destination = new MacAddress("02:02:02:02:02:02"),
+                    Source = new MacAddress(macAddressSource),
+                    Destination = new MacAddress(macAddressDest),
                     EtherType = EthernetType.None, // Will be filled automatically.
                 };
 
             IpV4Layer ipV4Layer =
                 new IpV4Layer
                 {
-                    Source = new IpV4Address("1.2.3.4"),
-                    CurrentDestination = new IpV4Address("11.22.33.44"),
+                    Source = new IpV4Address(ipSource),
+                    CurrentDestination = new IpV4Address(ipDest),
                     Fragmentation = IpV4Fragmentation.None,
                     HeaderChecksum = null, // Will be filled automatically.
                     Identification = 123,
@@ -516,16 +520,16 @@ namespace PacketGenerator
             EthernetLayer ethernetLayer =
                 new EthernetLayer
                 {
-                    Source = new MacAddress("01:01:01:01:01:01"),
-                    Destination = new MacAddress("02:02:02:02:02:02"),
+                    Source = new MacAddress(macAddressSource),
+                    Destination = new MacAddress(macAddressDest),
                     EtherType = EthernetType.None, // Will be filled automatically.
                 };
 
             IpV4Layer ipV4Layer =
                 new IpV4Layer
                 {
-                    Source = new IpV4Address("1.2.3.4"),
-                    CurrentDestination = new IpV4Address("11.22.33.44"),
+                    Source = new IpV4Address(ipSource),
+                    CurrentDestination = new IpV4Address(ipDest),
                     Fragmentation = IpV4Fragmentation.None,
                     HeaderChecksum = null, // Will be filled automatically.
                     Identification = 123,
@@ -573,8 +577,8 @@ namespace PacketGenerator
                 DateTime.Now,
                 new EthernetLayer
                 {
-                    Source = new MacAddress("01:01:01:01:01:01"),
-                    Destination = new MacAddress("02:02:02:02:02:02"),
+                    Source = new MacAddress(macAddressSource),
+                    Destination = new MacAddress(macAddressDest),
                     EtherType = EthernetType.None, // Will be filled automatically.
                 },
                 new VLanTaggedFrameLayer
@@ -591,8 +595,8 @@ namespace PacketGenerator
                 },
                 new IpV4Layer
                 {
-                    Source = new IpV4Address("1.2.3.4"),
-                    CurrentDestination = new IpV4Address("11.22.33.44"),
+                    Source = new IpV4Address(ipSource),
+                    CurrentDestination = new IpV4Address(ipDest),
                     Fragmentation = IpV4Fragmentation.None,
                     HeaderChecksum = null, // Will be filled automatically.
                     Identification = 123,
@@ -641,7 +645,7 @@ namespace PacketGenerator
                                           new GreSourceRouteEntryIp(
                                               new[]
                                                   {
-                                                      new IpV4Address("11.22.33.44"),
+                                                      new IpV4Address(ipDest),
                                                       new IpV4Address("44.33.22.11")
                                                   }.AsReadOnly(), 0)
                                       }.Cast<GreSourceRouteEntry>().ToArray().AsReadOnly(),

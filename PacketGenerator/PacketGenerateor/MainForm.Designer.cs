@@ -48,6 +48,8 @@
             this.labelPhys = new System.Windows.Forms.Label();
             this.btnEthernet = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnSetEthernet = new System.Windows.Forms.Button();
+            this.btnAddDataLink = new System.Windows.Forms.Button();
             this.labelDestHardwareAddr = new System.Windows.Forms.Label();
             this.destProtocolAddr = new System.Windows.Forms.TextBox();
             this.destHardwareAddr = new System.Windows.Forms.TextBox();
@@ -56,10 +58,17 @@
             this.labelSourceProtocolAddr = new System.Windows.Forms.Label();
             this.sourceHardwareAddr = new System.Windows.Forms.TextBox();
             this.labelSourceHardwareAddr = new System.Windows.Forms.Label();
-            this.txtDestinationMAC = new System.Windows.Forms.TextBox();
-            this.txtSourceMAC = new System.Windows.Forms.TextBox();
+            this.ethDestAddr = new System.Windows.Forms.TextBox();
+            this.ethSourceAddr = new System.Windows.Forms.TextBox();
             this.labelDestination = new System.Windows.Forms.Label();
             this.labelSource = new System.Windows.Forms.Label();
+            this.listPacketLayers = new System.Windows.Forms.ListBox();
+            this.labelPacketEstructure = new System.Windows.Forms.Label();
+            this.btnRemovePacketLayer = new System.Windows.Forms.Button();
+            this.netDestIP = new System.Windows.Forms.TextBox();
+            this.labelNetDestIP = new System.Windows.Forms.Label();
+            this.netSourceIP = new System.Windows.Forms.TextBox();
+            this.labelNetSourceIP = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -267,6 +276,12 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.netDestIP);
+            this.panel2.Controls.Add(this.labelNetDestIP);
+            this.panel2.Controls.Add(this.netSourceIP);
+            this.panel2.Controls.Add(this.labelNetSourceIP);
+            this.panel2.Controls.Add(this.btnSetEthernet);
+            this.panel2.Controls.Add(this.btnAddDataLink);
             this.panel2.Controls.Add(this.labelDestHardwareAddr);
             this.panel2.Controls.Add(this.destProtocolAddr);
             this.panel2.Controls.Add(this.destHardwareAddr);
@@ -275,14 +290,35 @@
             this.panel2.Controls.Add(this.labelSourceProtocolAddr);
             this.panel2.Controls.Add(this.sourceHardwareAddr);
             this.panel2.Controls.Add(this.labelSourceHardwareAddr);
-            this.panel2.Controls.Add(this.txtDestinationMAC);
-            this.panel2.Controls.Add(this.txtSourceMAC);
+            this.panel2.Controls.Add(this.ethDestAddr);
+            this.panel2.Controls.Add(this.ethSourceAddr);
             this.panel2.Controls.Add(this.labelDestination);
             this.panel2.Controls.Add(this.labelSource);
             this.panel2.Location = new System.Drawing.Point(205, 114);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(462, 324);
+            this.panel2.Size = new System.Drawing.Size(580, 324);
             this.panel2.TabIndex = 5;
+            // 
+            // btnSetEthernet
+            // 
+            this.btnSetEthernet.Location = new System.Drawing.Point(457, 287);
+            this.btnSetEthernet.Name = "btnSetEthernet";
+            this.btnSetEthernet.Size = new System.Drawing.Size(100, 20);
+            this.btnSetEthernet.TabIndex = 14;
+            this.btnSetEthernet.Text = "Set";
+            this.btnSetEthernet.UseVisualStyleBackColor = true;
+            this.btnSetEthernet.Click += new System.EventHandler(this.btnSetEthernet_Click);
+            // 
+            // btnAddDataLink
+            // 
+            this.btnAddDataLink.Location = new System.Drawing.Point(457, 238);
+            this.btnAddDataLink.Name = "btnAddDataLink";
+            this.btnAddDataLink.Size = new System.Drawing.Size(100, 20);
+            this.btnAddDataLink.TabIndex = 13;
+            this.btnAddDataLink.Text = "Add";
+            this.btnAddDataLink.UseVisualStyleBackColor = true;
+            this.btnAddDataLink.Visible = false;
+            this.btnAddDataLink.Click += new System.EventHandler(this.btnAddDataLink_Click);
             // 
             // labelDestHardwareAddr
             // 
@@ -324,7 +360,7 @@
             // 
             this.sourceProtocolAddr.Location = new System.Drawing.Point(122, 238);
             this.sourceProtocolAddr.Name = "sourceProtocolAddr";
-            this.sourceProtocolAddr.Size = new System.Drawing.Size(100, 20);
+            this.sourceProtocolAddr.Size = new System.Drawing.Size(108, 20);
             this.sourceProtocolAddr.TabIndex = 7;
             this.sourceProtocolAddr.Visible = false;
             // 
@@ -342,7 +378,7 @@
             // 
             this.sourceHardwareAddr.Location = new System.Drawing.Point(7, 238);
             this.sourceHardwareAddr.Name = "sourceHardwareAddr";
-            this.sourceHardwareAddr.Size = new System.Drawing.Size(100, 20);
+            this.sourceHardwareAddr.Size = new System.Drawing.Size(106, 20);
             this.sourceHardwareAddr.TabIndex = 5;
             this.sourceHardwareAddr.Visible = false;
             // 
@@ -356,21 +392,21 @@
             this.labelSourceHardwareAddr.Text = "SourceHardwareAddr";
             this.labelSourceHardwareAddr.Visible = false;
             // 
-            // txtDestinationMAC
+            // ethDestAddr
             // 
-            this.txtDestinationMAC.Location = new System.Drawing.Point(122, 295);
-            this.txtDestinationMAC.Name = "txtDestinationMAC";
-            this.txtDestinationMAC.Size = new System.Drawing.Size(100, 20);
-            this.txtDestinationMAC.TabIndex = 3;
-            this.txtDestinationMAC.Text = "192.168.1.2";
+            this.ethDestAddr.Location = new System.Drawing.Point(122, 295);
+            this.ethDestAddr.Name = "ethDestAddr";
+            this.ethDestAddr.Size = new System.Drawing.Size(109, 20);
+            this.ethDestAddr.TabIndex = 3;
+            this.ethDestAddr.Text = "F4:06:69:06:DC:EF";
             // 
-            // txtSourceMAC
+            // ethSourceAddr
             // 
-            this.txtSourceMAC.Location = new System.Drawing.Point(7, 295);
-            this.txtSourceMAC.Name = "txtSourceMAC";
-            this.txtSourceMAC.Size = new System.Drawing.Size(100, 20);
-            this.txtSourceMAC.TabIndex = 2;
-            this.txtSourceMAC.Text = "192.168.1.1";
+            this.ethSourceAddr.Location = new System.Drawing.Point(7, 295);
+            this.ethSourceAddr.Name = "ethSourceAddr";
+            this.ethSourceAddr.Size = new System.Drawing.Size(106, 20);
+            this.ethSourceAddr.TabIndex = 2;
+            this.ethSourceAddr.Text = "30:3A:64:69:70:FD";
             // 
             // labelDestination
             // 
@@ -390,11 +426,77 @@
             this.labelSource.TabIndex = 0;
             this.labelSource.Text = "Source";
             // 
+            // listPacketLayers
+            // 
+            this.listPacketLayers.FormattingEnabled = true;
+            this.listPacketLayers.Location = new System.Drawing.Point(802, 114);
+            this.listPacketLayers.Name = "listPacketLayers";
+            this.listPacketLayers.Size = new System.Drawing.Size(242, 160);
+            this.listPacketLayers.TabIndex = 6;
+            // 
+            // labelPacketEstructure
+            // 
+            this.labelPacketEstructure.AutoSize = true;
+            this.labelPacketEstructure.Location = new System.Drawing.Point(799, 98);
+            this.labelPacketEstructure.Name = "labelPacketEstructure";
+            this.labelPacketEstructure.Size = new System.Drawing.Size(92, 13);
+            this.labelPacketEstructure.TabIndex = 7;
+            this.labelPacketEstructure.Text = "Packet Estructure";
+            // 
+            // btnRemovePacketLayer
+            // 
+            this.btnRemovePacketLayer.Location = new System.Drawing.Point(917, 280);
+            this.btnRemovePacketLayer.Name = "btnRemovePacketLayer";
+            this.btnRemovePacketLayer.Size = new System.Drawing.Size(127, 30);
+            this.btnRemovePacketLayer.TabIndex = 8;
+            this.btnRemovePacketLayer.Text = "Remove";
+            this.btnRemovePacketLayer.UseVisualStyleBackColor = true;
+            this.btnRemovePacketLayer.Click += new System.EventHandler(this.btnRemovePacketLayer_Click);
+            // 
+            // netDestIP
+            // 
+            this.netDestIP.Location = new System.Drawing.Point(130, 141);
+            this.netDestIP.Name = "netDestIP";
+            this.netDestIP.Size = new System.Drawing.Size(100, 20);
+            this.netDestIP.TabIndex = 18;
+            this.netDestIP.Visible = false;
+            // 
+            // labelNetDestIP
+            // 
+            this.labelNetDestIP.AutoSize = true;
+            this.labelNetDestIP.Location = new System.Drawing.Point(127, 125);
+            this.labelNetDestIP.Name = "labelNetDestIP";
+            this.labelNetDestIP.Size = new System.Drawing.Size(42, 13);
+            this.labelNetDestIP.TabIndex = 17;
+            this.labelNetDestIP.Text = "Dest IP";
+            this.labelNetDestIP.Visible = false;
+            // 
+            // netSourceIP
+            // 
+            this.netSourceIP.Location = new System.Drawing.Point(7, 141);
+            this.netSourceIP.Name = "netSourceIP";
+            this.netSourceIP.Size = new System.Drawing.Size(108, 20);
+            this.netSourceIP.TabIndex = 16;
+            this.netSourceIP.Visible = false;
+            // 
+            // labelNetSourceIP
+            // 
+            this.labelNetSourceIP.AutoSize = true;
+            this.labelNetSourceIP.Location = new System.Drawing.Point(4, 125);
+            this.labelNetSourceIP.Name = "labelNetSourceIP";
+            this.labelNetSourceIP.Size = new System.Drawing.Size(54, 13);
+            this.labelNetSourceIP.TabIndex = 15;
+            this.labelNetSourceIP.Text = "Source IP";
+            this.labelNetSourceIP.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1056, 462);
+            this.Controls.Add(this.btnRemovePacketLayer);
+            this.Controls.Add(this.labelPacketEstructure);
+            this.Controls.Add(this.listPacketLayers);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSendPackets);
@@ -407,6 +509,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -434,8 +537,8 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label labelSource;
         private System.Windows.Forms.Label labelDestination;
-        private System.Windows.Forms.TextBox txtDestinationMAC;
-        private System.Windows.Forms.TextBox txtSourceMAC;
+        private System.Windows.Forms.TextBox ethDestAddr;
+        private System.Windows.Forms.TextBox ethSourceAddr;
         private System.Windows.Forms.TextBox sourceProtocolAddr;
         private System.Windows.Forms.Label labelSourceProtocolAddr;
         private System.Windows.Forms.TextBox sourceHardwareAddr;
@@ -444,6 +547,15 @@
         private System.Windows.Forms.Label labeldestProtocolAddr;
         private System.Windows.Forms.TextBox destHardwareAddr;
         private System.Windows.Forms.Label labelDestHardwareAddr;
+        private System.Windows.Forms.ListBox listPacketLayers;
+        private System.Windows.Forms.Label labelPacketEstructure;
+        private System.Windows.Forms.Button btnAddDataLink;
+        private System.Windows.Forms.Button btnSetEthernet;
+        private System.Windows.Forms.Button btnRemovePacketLayer;
+        private System.Windows.Forms.TextBox netDestIP;
+        private System.Windows.Forms.Label labelNetDestIP;
+        private System.Windows.Forms.TextBox netSourceIP;
+        private System.Windows.Forms.Label labelNetSourceIP;
     }
 }
 

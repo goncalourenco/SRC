@@ -21,3 +21,4 @@ C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\
 C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.MainForm.resources
 C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerator.csprojAssemblyReference.cache
