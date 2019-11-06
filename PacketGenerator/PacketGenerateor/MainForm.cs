@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
+using PacketGenerateor.Panels;
 using PacketGenerator;
 using PcapDotNet.Base;
 using PcapDotNet.Core;
@@ -27,9 +28,7 @@ namespace PacketGenerateor
         {
             packetLayers = new List<object>();
             InitializeComponent();
-            fillNetworkList();
-            fillTransportList();
-            fillApplicationList();
+            tabControl1.TabPages.Clear();
             addEthernetLayer();
         }
 
@@ -47,24 +46,16 @@ namespace PacketGenerateor
         private void fillApplicationList()
         {
             applications = new List<Button>();
-            applications.Add(btnDNS);
-            applications.Add(btnHTTP);
         }
 
         private void fillTransportList()
         {
             transport = new List<Button>();
-            transport.Add(btnUDP);
-            transport.Add(btnTCP);
         }
 
         private void fillNetworkList()
         {
             network = new List<Button>();
-            network.Add(btnICMP);
-            network.Add(btnIGMP);
-            network.Add(btnIPV4);
-            network.Add(btnIPV6);
         }
 
         private void btnListDevices_Click(object sender, EventArgs e)
@@ -166,9 +157,18 @@ namespace PacketGenerateor
             }
         }
 
+        internal void addToPacket(object layer, string v)
+        {
+            listPacketLayers.Items.Add(v);
+            packetLayers.Add(layer);
+        }
+
         private void btnIPV4_Click(object sender, EventArgs e)
         {
             disableButtons(sender);
+            TabPage page = new TabPage("IPV4");
+            page.Controls.Add(new TabIPV4(listPacketLayers));
+            tabControl1.TabPages.Add(page);
 
         }
 
@@ -230,7 +230,6 @@ namespace PacketGenerateor
         private void btnIPV6_Click(object sender, EventArgs e)
         {
             disableButtons(sender);
-
         }
 
         private void btnIGMP_Click(object sender, EventArgs e)
@@ -271,58 +270,10 @@ namespace PacketGenerateor
         private void listDevices_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedDevice = allDevices[listDevices.SelectedIndex];
-            if(sourceHardwareAddr.Visible == true)
-            {
-                sourceHardwareAddr.Text = getMACAddress();
-            }
-            ethSourceAddr.Text = getMACAddress();
         }
 
-        private void btnARP_Click(object sender, EventArgs e)
-        {
-            List<Label> arpLabels = new List<Label>();
-            List<TextBox> arpTextBoxes = new List<TextBox>();
-            arpLabels.Add(labelSourceProtocolAddr);
-            arpLabels.Add(labelSourceHardwareAddr);
-            arpLabels.Add(labeldestProtocolAddr);
-            arpLabels.Add(labelDestHardwareAddr);
-            arpTextBoxes.Add(sourceProtocolAddr);
-            arpTextBoxes.Add(sourceHardwareAddr);
-            arpTextBoxes.Add(destHardwareAddr);
-            arpTextBoxes.Add(destProtocolAddr);
-            if (labelSourceProtocolAddr.Visible == false)
-            {
-                foreach (Label l in arpLabels)
-                {
-                    l.Visible = true;
-                }
-                foreach (TextBox l in arpTextBoxes)
-                {
-                    l.Visible = true;
-                }
-                btnAddDataLink.Visible = true;
-            }
-            else
-            {
-                foreach (Label l in arpLabels)
-                {
-                    l.Visible = false;
-                }
-                foreach (TextBox l in arpTextBoxes)
-                {
-                    l.Visible = false;
-                }
-                btnAddDataLink.Visible = false;
 
-            }
-            sourceHardwareAddr.Text = getMACAddress();
-            sourceProtocolAddr.Text = "192.168.1.74";
-            destProtocolAddr.Text = "192.168.1.47";
-            destHardwareAddr.Text = sourceHardwareAddr.Text;
-
-        }
-
-        private string getMACAddress()
+        public string getMACAddress()
         {
             if(selectedDevice == null)
             {
@@ -350,26 +301,7 @@ namespace PacketGenerateor
             return string.Empty;
         }
 
-        private void btnAddDataLink_Click(object sender, EventArgs e)
-        {
-            ArpLayer arpLayer =
-                new ArpLayer
-                {
-                    ProtocolType = EthernetType.IpV4,
-                    Operation = ArpOperation.Request,
-                    //SenderHardwareAddress = new byte[] { 3, 3, 3, 3, 3, 3 }.AsReadOnly(), // 03:03:03:03:03:03.
-                    SenderHardwareAddress = sourceHardwareAddr.Text.Split(':').Select(x => Convert.ToByte(x, 16)).ToArray().AsReadOnly(), // 03:03:03:03:03:03.
-                    //SenderProtocolAddress = new byte[] { 1, 2, 3, 4 }.AsReadOnly(), // 1.2.3.4.
-                    SenderProtocolAddress = IPAddress.Parse(sourceProtocolAddr.Text).GetAddressBytes().AsReadOnly(), // 1.2.3.4.
-                    //TargetHardwareAddress = new byte[] { 4, 4, 4, 4, 4, 4 }.AsReadOnly(), // 04:04:04:04:04:04.
-                    TargetHardwareAddress = destHardwareAddr.Text.Split(':').Select(x => Convert.ToByte(x, 16)).ToArray().AsReadOnly(), // 04:04:04:04:04:04.
-                    //TargetProtocolAddress = new byte[] { 11, 22, 33, 44 }.AsReadOnly(), // 11.22.33.44.
-                    TargetProtocolAddress = IPAddress.Parse(destProtocolAddr.Text).GetAddressBytes().AsReadOnly(), // 11.22.33.44.
-                };
-            packetLayers.Add(arpLayer);
-            listPacketLayers.Items.Add("ARP -> " + sourceProtocolAddr.Text + " -> " + destProtocolAddr.Text);
-
-        }
+        
 
         private void btnSetEthernet_Click(object sender, EventArgs e)
         {
@@ -388,6 +320,30 @@ namespace PacketGenerateor
             {
                 listPacketLayers.Items.RemoveAt(listPacketLayers.SelectedIndex);
             }
+        }
+
+        private void btnDataLink_Click(object sender, EventArgs e)
+        {
+            tabControl1.TabPages.Clear();
+            TabPage page = new TabPage("ARP");
+            page.Controls.Add(new TabARP(this));
+            tabControl1.TabPages.Add(page);
+        }
+
+        private void btnNetwork_Click(object sender, EventArgs e)
+        {
+            tabControl1.TabPages.Clear();
+            TabPage page = new TabPage("IPV4");
+            page.Controls.Add(new TabIPV4(this));
+            tabControl1.TabPages.Add(page);
+            TabPage page2 = new TabPage("IPV6");
+            page2.Controls.Add(new TabIPV6(this));
+            tabControl1.TabPages.Add(page2);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ethSourceAddr.Text = getMACAddress();
         }
     }
 
