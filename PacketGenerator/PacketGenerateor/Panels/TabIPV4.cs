@@ -78,19 +78,17 @@ namespace PacketGenerateor.Panels
                                 CurrentDestination = new IpV4Address(netDestIP.Text),
                                 Fragmentation = IpV4Fragmentation.None,
                                 HeaderChecksum = checksum, // Will be filled automatically.
-                            Identification = ushort.Parse(identification.Text),
+                                Identification = ushort.Parse(identification.Text),
                                 Options = IpV4Options.None,
                                 Protocol = null, // Will be filled automatically.
-                            Ttl = byte.Parse(networkTTL.Text),
+                                Ttl = byte.Parse(networkTTL.Text),
                                 TypeOfService = byte.Parse(networkTOS.Text),
                             };
-                mainForm.addToPacket(ipV4Layer, "IPv4 -> " + netSourceIP.Text + " -> " + netDestIP.Text);
                 if (cmbIPV4Protocols.Enabled)
                 {
                     ipV4Layer.Protocol = (IpV4Protocol)Enum.Parse(typeof(IpV4Protocol), cmbIPV4Protocols.SelectedIndex.ToString());
                 }
-
-
+                mainForm.addToPacket(ipV4Layer, "IPv4 -> " + netSourceIP.Text + " -> " + netDestIP.Text);
 
             }
             catch (Exception)

@@ -238,6 +238,7 @@ namespace PacketGenerator
                     Checksum = null, // Will be filled automatically.
                     Identifier = 456,
                     SequenceNumber = 800,
+                    
                 };
 
             PacketBuilder builder = new PacketBuilder(ethernetLayer, ipV4Layer, icmpLayer);

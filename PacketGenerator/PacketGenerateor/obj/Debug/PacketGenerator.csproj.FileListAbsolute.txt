@@ -24,3 +24,6 @@ C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\
 C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerator.csprojAssemblyReference.cache
 C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.TabIPV4.resources
 C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.TabARP.resources
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.TabIPV6.resources
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.TabICMP.resources
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.TabIGMP.resources

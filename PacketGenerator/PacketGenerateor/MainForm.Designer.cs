@@ -32,7 +32,13 @@
             this.btnListDevices = new System.Windows.Forms.Button();
             this.btnSendPackets = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnApplication = new System.Windows.Forms.Button();
+            this.btnTransport = new System.Windows.Forms.Button();
+            this.btnNetwork = new System.Windows.Forms.Button();
+            this.btnDataLink = new System.Windows.Forms.Button();
+            this.btnPhysical = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -44,12 +50,6 @@
             this.listPacketLayers = new System.Windows.Forms.ListBox();
             this.labelPacketEstructure = new System.Windows.Forms.Label();
             this.btnRemovePacketLayer = new System.Windows.Forms.Button();
-            this.btnPhysical = new System.Windows.Forms.Button();
-            this.btnDataLink = new System.Windows.Forms.Button();
-            this.btnNetwork = new System.Windows.Forms.Button();
-            this.btnTransport = new System.Windows.Forms.Button();
-            this.btnApplication = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -96,6 +96,55 @@
             this.panel1.Size = new System.Drawing.Size(185, 325);
             this.panel1.TabIndex = 4;
             // 
+            // btnApplication
+            // 
+            this.btnApplication.Location = new System.Drawing.Point(4, 108);
+            this.btnApplication.Name = "btnApplication";
+            this.btnApplication.Size = new System.Drawing.Size(178, 38);
+            this.btnApplication.TabIndex = 18;
+            this.btnApplication.Text = "Application";
+            this.btnApplication.UseVisualStyleBackColor = true;
+            // 
+            // btnTransport
+            // 
+            this.btnTransport.Location = new System.Drawing.Point(4, 152);
+            this.btnTransport.Name = "btnTransport";
+            this.btnTransport.Size = new System.Drawing.Size(178, 38);
+            this.btnTransport.TabIndex = 17;
+            this.btnTransport.Text = "Transport";
+            this.btnTransport.UseVisualStyleBackColor = true;
+            this.btnTransport.Click += new System.EventHandler(this.btnTransport_Click);
+            // 
+            // btnNetwork
+            // 
+            this.btnNetwork.Location = new System.Drawing.Point(4, 196);
+            this.btnNetwork.Name = "btnNetwork";
+            this.btnNetwork.Size = new System.Drawing.Size(178, 38);
+            this.btnNetwork.TabIndex = 16;
+            this.btnNetwork.Text = "Network";
+            this.btnNetwork.UseVisualStyleBackColor = true;
+            this.btnNetwork.Click += new System.EventHandler(this.btnNetwork_Click);
+            // 
+            // btnDataLink
+            // 
+            this.btnDataLink.Location = new System.Drawing.Point(4, 240);
+            this.btnDataLink.Name = "btnDataLink";
+            this.btnDataLink.Size = new System.Drawing.Size(178, 38);
+            this.btnDataLink.TabIndex = 15;
+            this.btnDataLink.Text = "Data Link";
+            this.btnDataLink.UseVisualStyleBackColor = true;
+            this.btnDataLink.Click += new System.EventHandler(this.btnDataLink_Click);
+            // 
+            // btnPhysical
+            // 
+            this.btnPhysical.Enabled = false;
+            this.btnPhysical.Location = new System.Drawing.Point(4, 284);
+            this.btnPhysical.Name = "btnPhysical";
+            this.btnPhysical.Size = new System.Drawing.Size(178, 38);
+            this.btnPhysical.TabIndex = 14;
+            this.btnPhysical.Text = "Physical";
+            this.btnPhysical.UseVisualStyleBackColor = true;
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.button1);
@@ -109,6 +158,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(591, 324);
             this.panel2.TabIndex = 5;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(180, 276);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 20);
+            this.button1.TabIndex = 31;
+            this.button1.Text = "GET MY";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabControl1
             // 
@@ -210,64 +269,6 @@
             this.btnRemovePacketLayer.Text = "Remove";
             this.btnRemovePacketLayer.UseVisualStyleBackColor = true;
             this.btnRemovePacketLayer.Click += new System.EventHandler(this.btnRemovePacketLayer_Click);
-            // 
-            // btnPhysical
-            // 
-            this.btnPhysical.Enabled = false;
-            this.btnPhysical.Location = new System.Drawing.Point(4, 284);
-            this.btnPhysical.Name = "btnPhysical";
-            this.btnPhysical.Size = new System.Drawing.Size(178, 38);
-            this.btnPhysical.TabIndex = 14;
-            this.btnPhysical.Text = "Physical";
-            this.btnPhysical.UseVisualStyleBackColor = true;
-            // 
-            // btnDataLink
-            // 
-            this.btnDataLink.Location = new System.Drawing.Point(4, 240);
-            this.btnDataLink.Name = "btnDataLink";
-            this.btnDataLink.Size = new System.Drawing.Size(178, 38);
-            this.btnDataLink.TabIndex = 15;
-            this.btnDataLink.Text = "Data Link";
-            this.btnDataLink.UseVisualStyleBackColor = true;
-            this.btnDataLink.Click += new System.EventHandler(this.btnDataLink_Click);
-            // 
-            // btnNetwork
-            // 
-            this.btnNetwork.Location = new System.Drawing.Point(4, 196);
-            this.btnNetwork.Name = "btnNetwork";
-            this.btnNetwork.Size = new System.Drawing.Size(178, 38);
-            this.btnNetwork.TabIndex = 16;
-            this.btnNetwork.Text = "Network";
-            this.btnNetwork.UseVisualStyleBackColor = true;
-            this.btnNetwork.Click += new System.EventHandler(this.btnNetwork_Click);
-            // 
-            // btnTransport
-            // 
-            this.btnTransport.Location = new System.Drawing.Point(4, 152);
-            this.btnTransport.Name = "btnTransport";
-            this.btnTransport.Size = new System.Drawing.Size(178, 38);
-            this.btnTransport.TabIndex = 17;
-            this.btnTransport.Text = "Transport";
-            this.btnTransport.UseVisualStyleBackColor = true;
-            // 
-            // btnApplication
-            // 
-            this.btnApplication.Location = new System.Drawing.Point(4, 108);
-            this.btnApplication.Name = "btnApplication";
-            this.btnApplication.Size = new System.Drawing.Size(178, 38);
-            this.btnApplication.TabIndex = 18;
-            this.btnApplication.Text = "Application";
-            this.btnApplication.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(180, 276);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 20);
-            this.button1.TabIndex = 31;
-            this.button1.Text = "GET MY";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainForm
             // 

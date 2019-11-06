@@ -339,11 +339,22 @@ namespace PacketGenerateor
             TabPage page2 = new TabPage("IPV6");
             page2.Controls.Add(new TabIPV6(this));
             tabControl1.TabPages.Add(page2);
+            TabPage page3 = new TabPage("ICMP");
+            page3.Controls.Add(new TabICMP(this));
+            tabControl1.TabPages.Add(page3);
+            TabPage page4 = new TabPage("IGMP");
+            page4.Controls.Add(new TabIGMP(this));
+            tabControl1.TabPages.Add(page4);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             ethSourceAddr.Text = getMACAddress();
+        }
+
+        private void btnTransport_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
