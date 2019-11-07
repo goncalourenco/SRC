@@ -305,13 +305,20 @@ namespace PacketGenerateor
 
         private void btnSetEthernet_Click(object sender, EventArgs e)
         {
-            EthernetLayer ethernetLayer = new EthernetLayer
+            try
             {
-                Source = new MacAddress(ethSourceAddr.Text),
-                Destination = new MacAddress(ethDestAddr.Text)
-            };
-            packetLayers[0] = ethernetLayer;
-            listPacketLayers.Items[0] = ("ETH -> " + ethernetLayer.ToString());
+                EthernetLayer ethernetLayer = new EthernetLayer
+                {
+                    Source = new MacAddress(ethSourceAddr.Text),
+                    Destination = new MacAddress(ethDestAddr.Text)
+                };
+                packetLayers[0] = ethernetLayer;
+                listPacketLayers.Items[0] = ("ETH -> " + ethernetLayer.ToString());
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid Parameters");
+            }
         }
 
         private void btnRemovePacketLayer_Click(object sender, EventArgs e)
@@ -319,6 +326,7 @@ namespace PacketGenerateor
             if(listPacketLayers.SelectedIndex > 0)
             {
                 listPacketLayers.Items.RemoveAt(listPacketLayers.SelectedIndex);
+                packetLayers.Remove(listPacketLayers.SelectedIndex);
             }
         }
 
@@ -354,7 +362,24 @@ namespace PacketGenerateor
 
         private void btnTransport_Click(object sender, EventArgs e)
         {
+            tabControl1.TabPages.Clear();
+            TabPage page = new TabPage("TCP");
+            page.Controls.Add(new TabTCP(this));
+            tabControl1.TabPages.Add(page);
+            TabPage page2 = new TabPage("UDP");
+            page2.Controls.Add(new TabUDP(this));
+            tabControl1.TabPages.Add(page2);
+        }
 
+        private void btnApplication_Click(object sender, EventArgs e)
+        {
+            tabControl1.TabPages.Clear();
+            TabPage page = new TabPage("HTTP");
+            page.Controls.Add(new TabHttp(this));
+            tabControl1.TabPages.Add(page);
+            TabPage page2 = new TabPage("DNS");
+            page2.Controls.Add(new TabDNS(this));
+            tabControl1.TabPages.Add(page2);
         }
     }
 

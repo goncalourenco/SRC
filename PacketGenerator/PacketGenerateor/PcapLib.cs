@@ -480,6 +480,7 @@ namespace PacketGenerator
                     DestinationPort = 53,
                     Checksum = null, // Will be filled automatically.
                     CalculateChecksumValue = true,
+
                 };
 
             DnsLayer dnsLayer =
@@ -506,6 +507,7 @@ namespace PacketGenerator
                     Authorities = null,
                     Additionals = null,
                     DomainNameCompressionMode = DnsDomainNameCompressionMode.All,
+                    
                 };
 
             PacketBuilder builder = new PacketBuilder(ethernetLayer, ipV4Layer, udpLayer, dnsLayer);
