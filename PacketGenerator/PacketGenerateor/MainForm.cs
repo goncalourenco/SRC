@@ -23,11 +23,20 @@ namespace PacketGenerateor
         private List<Button> transport;
         private List<Button> applications;
         private PacketDevice selectedDevice;
-        private List<Object> packetLayers;
+        private List<Layer> packetLayers;
+        private PacketCommunicator communicator;
+
         public MainForm()
         {
-            packetLayers = new List<object>();
+            packetLayers = new List<Layer>();
+           
             InitializeComponent();
+            foreach (var item in Enum.GetNames(typeof(EthernetType)))
+            {
+                cmbEthType.Items.Add(item);
+            }
+            cmbEthType.SelectedIndex = 1;
+            refreshAdapters();
             tabControl1.TabPages.Clear();
             addEthernetLayer();
         }
@@ -37,7 +46,8 @@ namespace PacketGenerateor
             EthernetLayer ethernetLayer = new EthernetLayer
             {
                 Source = new MacAddress(ethSourceAddr.Text),
-                Destination = new MacAddress(ethDestAddr.Text)
+                Destination = new MacAddress(ethDestAddr.Text),
+                EtherType = (EthernetType)Enum.Parse(typeof(EthernetType), cmbEthType.SelectedItem.ToString()),
             };
             packetLayers.Add(ethernetLayer);
             listPacketLayers.Items.Add("ETH -> " + ethernetLayer.ToString());
@@ -60,6 +70,11 @@ namespace PacketGenerateor
 
         private void btnListDevices_Click(object sender, EventArgs e)
         {
+            refreshAdapters();
+        }
+
+        private void refreshAdapters()
+        {
             allDevices = LivePacketDevice.AllLocalMachine;
 
             if (allDevices.Count == 0)
@@ -67,28 +82,28 @@ namespace PacketGenerateor
                 Console.WriteLine("No interfaces found! Make sure WinPcap is installed.");
                 return;
             }
-
-            // Print the list
+            cmbAdapters.Items.Clear();
             for (int i = 0; i != allDevices.Count; ++i)
             {
                 LivePacketDevice device = allDevices[i];
-                listDevices.Items.Add(device.Description);
+                cmbAdapters.Items.Add(device.Description);
                 if (device.Description != null)
                     Console.WriteLine(" (" + device.Description + ")");
                 else
                     Console.WriteLine(" (No description available)");
             }
+            cmbAdapters.SelectedIndex = 0;
         }
 
         private void btnSendPackets_Click(object sender, EventArgs e)
         {
             // Take the selected adapter
-            selectedDevice = allDevices[listDevices.SelectedIndex];
+            //selectedDevice = allDevices[cmbAdapters.SelectedIndex];
 
             // Open the output device
-            using (PacketCommunicator communicator = selectedDevice.Open(100, // name of the device
+            /*using (PacketCommunicator communicator = selectedDevice.Open(100, // name of the device
                                                                          PacketDeviceOpenAttributes.Promiscuous, // promiscuous mode
-                                                                         1000)) // read timeout
+                                                                         1000)) // read timeou`*/
             {
                 // Supposing to be on ethernet, set mac source to 01:01:01:01:01:01
                 MacAddress source = new MacAddress("30:3A:64:69:70:FD");
@@ -160,7 +175,7 @@ namespace PacketGenerateor
         internal void addToPacket(object layer, string v)
         {
             listPacketLayers.Items.Add(v);
-            packetLayers.Add(layer);
+            packetLayers.Add((Layer)layer);
         }
 
         private void btnIPV4_Click(object sender, EventArgs e)
@@ -269,7 +284,7 @@ namespace PacketGenerateor
 
         private void listDevices_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedDevice = allDevices[listDevices.SelectedIndex];
+            selectedDevice = allDevices[cmbAdapters.SelectedIndex];
         }
 
 
@@ -310,7 +325,8 @@ namespace PacketGenerateor
                 EthernetLayer ethernetLayer = new EthernetLayer
                 {
                     Source = new MacAddress(ethSourceAddr.Text),
-                    Destination = new MacAddress(ethDestAddr.Text)
+                    Destination = new MacAddress(ethDestAddr.Text),
+                    EtherType = (EthernetType)Enum.Parse(typeof(EthernetType), cmbEthType.SelectedItem.ToString())
                 };
                 packetLayers[0] = ethernetLayer;
                 listPacketLayers.Items[0] = ("ETH -> " + ethernetLayer.ToString());
@@ -325,8 +341,9 @@ namespace PacketGenerateor
         {
             if(listPacketLayers.SelectedIndex > 0)
             {
+                packetLayers.RemoveAt(listPacketLayers.SelectedIndex);
                 listPacketLayers.Items.RemoveAt(listPacketLayers.SelectedIndex);
-                packetLayers.Remove(listPacketLayers.SelectedIndex);
+
             }
         }
 
@@ -380,6 +397,30 @@ namespace PacketGenerateor
             TabPage page2 = new TabPage("DNS");
             page2.Controls.Add(new TabDNS(this));
             tabControl1.TabPages.Add(page2);
+        }
+
+        private void btnSendPacket_Click(object sender, EventArgs e)
+        {
+            
+            try
+            {
+                PacketBuilder builder = new PacketBuilder(packetLayers.ToArray());
+                //MessageBox.Show(packetLayers.ToArray()[0].ToString());
+                communicator.SendPacket(builder.Build(DateTime.Now));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            
+        }
+
+        private void cmbAdapters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedDevice = allDevices[cmbAdapters.SelectedIndex];
+            communicator = selectedDevice.Open(100, // name of the device
+                                                                            PacketDeviceOpenAttributes.Promiscuous, // promiscuous mode
+                                                                            1000);
         }
     }
 

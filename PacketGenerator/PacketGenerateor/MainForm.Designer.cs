@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listDevices = new System.Windows.Forms.ListBox();
             this.btnListDevices = new System.Windows.Forms.Button();
             this.btnSendPackets = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -38,7 +37,9 @@
             this.btnDataLink = new System.Windows.Forms.Button();
             this.btnPhysical = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.labelIPv4Protocol = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.cmbEthType = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -50,25 +51,18 @@
             this.listPacketLayers = new System.Windows.Forms.ListBox();
             this.labelPacketEstructure = new System.Windows.Forms.Label();
             this.btnRemovePacketLayer = new System.Windows.Forms.Button();
+            this.btnSendPacket = new System.Windows.Forms.Button();
+            this.cmbAdapters = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listDevices
-            // 
-            this.listDevices.FormattingEnabled = true;
-            this.listDevices.Location = new System.Drawing.Point(142, 12);
-            this.listDevices.Name = "listDevices";
-            this.listDevices.Size = new System.Drawing.Size(646, 95);
-            this.listDevices.TabIndex = 0;
-            this.listDevices.SelectedIndexChanged += new System.EventHandler(this.listDevices_SelectedIndexChanged);
-            // 
             // btnListDevices
             // 
-            this.btnListDevices.Location = new System.Drawing.Point(13, 13);
+            this.btnListDevices.Location = new System.Drawing.Point(14, 23);
             this.btnListDevices.Name = "btnListDevices";
-            this.btnListDevices.Size = new System.Drawing.Size(123, 42);
+            this.btnListDevices.Size = new System.Drawing.Size(123, 21);
             this.btnListDevices.TabIndex = 1;
             this.btnListDevices.Text = "List Devices";
             this.btnListDevices.UseVisualStyleBackColor = true;
@@ -76,9 +70,9 @@
             // 
             // btnSendPackets
             // 
-            this.btnSendPackets.Location = new System.Drawing.Point(13, 61);
+            this.btnSendPackets.Location = new System.Drawing.Point(803, 23);
             this.btnSendPackets.Name = "btnSendPackets";
-            this.btnSendPackets.Size = new System.Drawing.Size(123, 46);
+            this.btnSendPackets.Size = new System.Drawing.Size(242, 21);
             this.btnSendPackets.TabIndex = 2;
             this.btnSendPackets.Text = "Send Packets";
             this.btnSendPackets.UseVisualStyleBackColor = true;
@@ -91,7 +85,7 @@
             this.panel1.Controls.Add(this.btnNetwork);
             this.panel1.Controls.Add(this.btnDataLink);
             this.panel1.Controls.Add(this.btnPhysical);
-            this.panel1.Location = new System.Drawing.Point(13, 113);
+            this.panel1.Location = new System.Drawing.Point(14, 78);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(185, 325);
             this.panel1.TabIndex = 4;
@@ -148,17 +142,28 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.labelIPv4Protocol);
             this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.cmbEthType);
             this.panel2.Controls.Add(this.tabControl1);
             this.panel2.Controls.Add(this.btnSetEthernet);
             this.panel2.Controls.Add(this.ethDestAddr);
             this.panel2.Controls.Add(this.ethSourceAddr);
             this.panel2.Controls.Add(this.labelDestination);
             this.panel2.Controls.Add(this.labelSource);
-            this.panel2.Location = new System.Drawing.Point(205, 114);
+            this.panel2.Location = new System.Drawing.Point(206, 79);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(591, 324);
             this.panel2.TabIndex = 5;
+            // 
+            // labelIPv4Protocol
+            // 
+            this.labelIPv4Protocol.AutoSize = true;
+            this.labelIPv4Protocol.Location = new System.Drawing.Point(283, 279);
+            this.labelIPv4Protocol.Name = "labelIPv4Protocol";
+            this.labelIPv4Protocol.Size = new System.Drawing.Size(50, 13);
+            this.labelIPv4Protocol.TabIndex = 39;
+            this.labelIPv4Protocol.Text = "Eth Type";
             // 
             // button1
             // 
@@ -169,6 +174,14 @@
             this.button1.Text = "GET MY";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // cmbEthType
+            // 
+            this.cmbEthType.FormattingEnabled = true;
+            this.cmbEthType.Location = new System.Drawing.Point(286, 293);
+            this.cmbEthType.Name = "cmbEthType";
+            this.cmbEthType.Size = new System.Drawing.Size(142, 21);
+            this.cmbEthType.TabIndex = 38;
             // 
             // tabControl1
             // 
@@ -195,7 +208,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(577, 190);
+            this.tabPage2.Size = new System.Drawing.Size(577, 241);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -247,7 +260,7 @@
             // listPacketLayers
             // 
             this.listPacketLayers.FormattingEnabled = true;
-            this.listPacketLayers.Location = new System.Drawing.Point(802, 114);
+            this.listPacketLayers.Location = new System.Drawing.Point(803, 79);
             this.listPacketLayers.Name = "listPacketLayers";
             this.listPacketLayers.Size = new System.Drawing.Size(242, 160);
             this.listPacketLayers.TabIndex = 6;
@@ -255,7 +268,7 @@
             // labelPacketEstructure
             // 
             this.labelPacketEstructure.AutoSize = true;
-            this.labelPacketEstructure.Location = new System.Drawing.Point(799, 98);
+            this.labelPacketEstructure.Location = new System.Drawing.Point(800, 63);
             this.labelPacketEstructure.Name = "labelPacketEstructure";
             this.labelPacketEstructure.Size = new System.Drawing.Size(92, 13);
             this.labelPacketEstructure.TabIndex = 7;
@@ -263,19 +276,41 @@
             // 
             // btnRemovePacketLayer
             // 
-            this.btnRemovePacketLayer.Location = new System.Drawing.Point(917, 280);
+            this.btnRemovePacketLayer.Location = new System.Drawing.Point(927, 245);
             this.btnRemovePacketLayer.Name = "btnRemovePacketLayer";
-            this.btnRemovePacketLayer.Size = new System.Drawing.Size(127, 30);
+            this.btnRemovePacketLayer.Size = new System.Drawing.Size(118, 30);
             this.btnRemovePacketLayer.TabIndex = 8;
             this.btnRemovePacketLayer.Text = "Remove";
             this.btnRemovePacketLayer.UseVisualStyleBackColor = true;
             this.btnRemovePacketLayer.Click += new System.EventHandler(this.btnRemovePacketLayer_Click);
+            // 
+            // btnSendPacket
+            // 
+            this.btnSendPacket.Location = new System.Drawing.Point(804, 245);
+            this.btnSendPacket.Name = "btnSendPacket";
+            this.btnSendPacket.Size = new System.Drawing.Size(117, 30);
+            this.btnSendPacket.TabIndex = 9;
+            this.btnSendPacket.Text = "Send";
+            this.btnSendPacket.UseVisualStyleBackColor = true;
+            this.btnSendPacket.Click += new System.EventHandler(this.btnSendPacket_Click);
+            // 
+            // cmbAdapters
+            // 
+            this.cmbAdapters.FormattingEnabled = true;
+            this.cmbAdapters.ItemHeight = 13;
+            this.cmbAdapters.Location = new System.Drawing.Point(143, 23);
+            this.cmbAdapters.Name = "cmbAdapters";
+            this.cmbAdapters.Size = new System.Drawing.Size(646, 21);
+            this.cmbAdapters.TabIndex = 40;
+            this.cmbAdapters.SelectedIndexChanged += new System.EventHandler(this.cmbAdapters_SelectedIndexChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1056, 462);
+            this.Controls.Add(this.cmbAdapters);
+            this.Controls.Add(this.btnSendPacket);
             this.Controls.Add(this.btnRemovePacketLayer);
             this.Controls.Add(this.labelPacketEstructure);
             this.Controls.Add(this.listPacketLayers);
@@ -283,7 +318,6 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSendPackets);
             this.Controls.Add(this.btnListDevices);
-            this.Controls.Add(this.listDevices);
             this.Name = "MainForm";
             this.Text = "ICMP";
             this.panel1.ResumeLayout(false);
@@ -296,8 +330,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox listDevices;
         private System.Windows.Forms.Button btnListDevices;
         private System.Windows.Forms.Button btnSendPackets;
         private System.Windows.Forms.Panel panel1;
@@ -319,6 +351,10 @@
         private System.Windows.Forms.Button btnDataLink;
         private System.Windows.Forms.Button btnPhysical;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSendPacket;
+        private System.Windows.Forms.Label labelIPv4Protocol;
+        private System.Windows.Forms.ComboBox cmbEthType;
+        private System.Windows.Forms.ComboBox cmbAdapters;
     }
 }
 
