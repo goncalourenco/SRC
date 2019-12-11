@@ -42,6 +42,7 @@
             this.cmbEthType = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabICMP1 = new PacketGenerateor.Panels.TabICMP();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnSetEthernet = new System.Windows.Forms.Button();
             this.ethDestAddr = new System.Windows.Forms.TextBox();
@@ -53,9 +54,11 @@
             this.btnRemovePacketLayer = new System.Windows.Forms.Button();
             this.btnSendPacket = new System.Windows.Forms.Button();
             this.cmbAdapters = new System.Windows.Forms.ComboBox();
+            this.udp_flow_click = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnListDevices
@@ -164,6 +167,7 @@
             this.labelIPv4Protocol.Size = new System.Drawing.Size(50, 13);
             this.labelIPv4Protocol.TabIndex = 39;
             this.labelIPv4Protocol.Text = "Eth Type";
+            this.labelIPv4Protocol.Click += new System.EventHandler(this.labelIPv4Protocol_Click);
             // 
             // button1
             // 
@@ -182,6 +186,7 @@
             this.cmbEthType.Name = "cmbEthType";
             this.cmbEthType.Size = new System.Drawing.Size(142, 21);
             this.cmbEthType.TabIndex = 38;
+            this.cmbEthType.SelectedIndexChanged += new System.EventHandler(this.cmbEthType_SelectedIndexChanged);
             // 
             // tabControl1
             // 
@@ -195,6 +200,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.tabICMP1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -202,6 +208,13 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabICMP1
+            // 
+            this.tabICMP1.Location = new System.Drawing.Point(11, 11);
+            this.tabICMP1.Name = "tabICMP1";
+            this.tabICMP1.Size = new System.Drawing.Size(481, 219);
+            this.tabICMP1.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -230,6 +243,7 @@
             this.ethDestAddr.Size = new System.Drawing.Size(109, 20);
             this.ethDestAddr.TabIndex = 3;
             this.ethDestAddr.Text = "F4:06:69:06:DC:EF";
+            this.ethDestAddr.TextChanged += new System.EventHandler(this.ethDestAddr_TextChanged);
             // 
             // ethSourceAddr
             // 
@@ -238,6 +252,7 @@
             this.ethSourceAddr.Size = new System.Drawing.Size(109, 20);
             this.ethSourceAddr.TabIndex = 2;
             this.ethSourceAddr.Text = "30:3A:64:69:70:FD";
+            this.ethSourceAddr.TextChanged += new System.EventHandler(this.ethSourceAddr_TextChanged);
             // 
             // labelDestination
             // 
@@ -247,6 +262,7 @@
             this.labelDestination.Size = new System.Drawing.Size(60, 13);
             this.labelDestination.TabIndex = 1;
             this.labelDestination.Text = "Destination";
+            this.labelDestination.Click += new System.EventHandler(this.labelDestination_Click);
             // 
             // labelSource
             // 
@@ -256,6 +272,7 @@
             this.labelSource.Size = new System.Drawing.Size(41, 13);
             this.labelSource.TabIndex = 0;
             this.labelSource.Text = "Source";
+            this.labelSource.Click += new System.EventHandler(this.labelSource_Click);
             // 
             // listPacketLayers
             // 
@@ -304,11 +321,22 @@
             this.cmbAdapters.TabIndex = 40;
             this.cmbAdapters.SelectedIndexChanged += new System.EventHandler(this.cmbAdapters_SelectedIndexChanged);
             // 
+            // udp_flow_click
+            // 
+            this.udp_flow_click.Location = new System.Drawing.Point(804, 288);
+            this.udp_flow_click.Name = "udp_flow_click";
+            this.udp_flow_click.Size = new System.Drawing.Size(75, 23);
+            this.udp_flow_click.TabIndex = 41;
+            this.udp_flow_click.Text = "UDP flow";
+            this.udp_flow_click.UseVisualStyleBackColor = true;
+            this.udp_flow_click.Click += new System.EventHandler(this.button2_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1056, 462);
+            this.Controls.Add(this.udp_flow_click);
             this.Controls.Add(this.cmbAdapters);
             this.Controls.Add(this.btnSendPacket);
             this.Controls.Add(this.btnRemovePacketLayer);
@@ -324,6 +352,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -355,6 +384,8 @@
         private System.Windows.Forms.Label labelIPv4Protocol;
         private System.Windows.Forms.ComboBox cmbEthType;
         private System.Windows.Forms.ComboBox cmbAdapters;
+        private System.Windows.Forms.Button udp_flow_click;
+        private Panels.TabICMP tabICMP1;
     }
 }
 

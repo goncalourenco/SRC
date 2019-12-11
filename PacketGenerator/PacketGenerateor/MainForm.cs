@@ -13,6 +13,7 @@ using PcapDotNet.Packets.Arp;
 using PcapDotNet.Packets.Ethernet;
 using PcapDotNet.Packets.Icmp;
 using PcapDotNet.Packets.IpV4;
+using PcapDotNet.Packets.Transport;
 
 namespace PacketGenerateor
 {
@@ -421,6 +422,91 @@ namespace PacketGenerateor
             communicator = selectedDevice.Open(100, // name of the device
                                                                             PacketDeviceOpenAttributes.Promiscuous, // promiscuous mode
                                                                             1000);
+        }
+
+        private void btnTLStest_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PacketBuilder builder = new PacketBuilder(new EthernetLayer
+                {
+                    Source = new MacAddress(ethSourceAddr.Text),
+                    Destination = new MacAddress(ethDestAddr.Text),
+                    EtherType = EthernetType.None, // Will be filled automatically.
+                }, new IpV4Layer
+                {
+                    Source = new IpV4Address("192.168.1.1"),
+                    CurrentDestination = new IpV4Address("192.168.1.2"),
+                    Fragmentation = IpV4Fragmentation.None,
+                    HeaderChecksum = null, // Will be filled automatically.
+                    Identification = 123,
+                    Options = IpV4Options.None,
+                    Protocol = null, // Will be filled automatically.
+                    Ttl = 100,
+                    TypeOfService = 0,
+                }, new TcpLayer
+                {
+                    SourcePort = 4050,
+                    DestinationPort = 25,
+                    Checksum = null, // Will be filled automatically.
+                    SequenceNumber = 1,
+                    AcknowledgmentNumber = 50,
+                    ControlBits = TcpControlBits.Acknowledgment,
+                    Window = 100,
+                    UrgentPointer = 0,
+                    Options = TcpOptions.None,
+                }
+                );
+                //MessageBox.Show(packetLayers.ToArray()[0].ToString());
+                communicator.SendPacket(builder.Build(DateTime.Now));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (listPacketLayers.Items.Count !=3)
+            {
+                MessageBox.Show("The packet needs to have ETH, IP and Transport layers before a udp flow can be created.");   
+            } else
+            {
+                UDPFlowForm form = new UDPFlowForm();
+                form.Show();
+                form.Communicator = communicator;
+            }   
+        }
+
+        private void labelIPv4Protocol_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbEthType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ethDestAddr_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ethSourceAddr_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelDestination_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelSource_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

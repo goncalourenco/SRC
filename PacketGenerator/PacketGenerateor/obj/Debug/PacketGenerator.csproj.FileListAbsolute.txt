@@ -33,3 +33,4 @@ C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\
 C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.TabDNS.resources
 C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.SubPanels.Query.resources
 C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.SubPanels.Answer.resources
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.UDPFlowForm.resources

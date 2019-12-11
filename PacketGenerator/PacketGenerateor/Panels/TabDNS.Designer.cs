@@ -427,7 +427,7 @@
             this.Controls.Add(this.txtIdentification);
             this.Controls.Add(this.labelNetworkID);
             this.Name = "TabDNS";
-            this.Size = new System.Drawing.Size(568, 245);
+            this.Size = new System.Drawing.Size(565, 245);
             this.ResumeLayout(false);
             this.PerformLayout();
 
