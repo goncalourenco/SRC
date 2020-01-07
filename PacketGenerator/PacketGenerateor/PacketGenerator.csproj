@@ -61,6 +61,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Panels\SubPanels\Answer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\SubPanels\Answer.Designer.cs">
+      <DependentUpon>Answer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\SubPanels\Query.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\SubPanels\Query.Designer.cs">
+      <DependentUpon>Query.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\TabDNS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\TabDNS.Designer.cs">
+      <DependentUpon>TabDNS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\TabHttp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\TabHttp.Designer.cs">
+      <DependentUpon>TabHttp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Panels\TabIGMP.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -91,6 +115,19 @@
     <Compile Include="Panels\TabIPV6.Designer.cs">
       <DependentUpon>TabIPV6.cs</DependentUpon>
     </Compile>
+    <Compile Include="Panels\TabTCP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\TabTCP.Designer.cs">
+      <DependentUpon>TabTCP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\TabUDP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\TabUDP.Designer.cs">
+      <DependentUpon>TabUDP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PcapDotNetExtra.cs" />
     <Compile Include="PcapLib.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -100,8 +137,26 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UDPFlowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UDPFlowForm.Designer.cs">
+      <DependentUpon>UDPFlowForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\SubPanels\Answer.resx">
+      <DependentUpon>Answer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\SubPanels\Query.resx">
+      <DependentUpon>Query.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\TabDNS.resx">
+      <DependentUpon>TabDNS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\TabHttp.resx">
+      <DependentUpon>TabHttp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Panels\TabIGMP.resx">
       <DependentUpon>TabIGMP.cs</DependentUpon>
@@ -118,6 +173,12 @@
     <EmbeddedResource Include="Panels\TabIPV6.resx">
       <DependentUpon>TabIPV6.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Panels\TabTCP.resx">
+      <DependentUpon>TabTCP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\TabUDP.resx">
+      <DependentUpon>TabUDP.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -127,6 +188,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UDPFlowForm.resx">
+      <DependentUpon>UDPFlowForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

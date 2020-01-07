@@ -55,10 +55,6 @@ namespace PacketGenerateor.Panels
             }
         }
 
-        private void cmbIPV4Protocols_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -86,10 +82,9 @@ namespace PacketGenerateor.Panels
                             };
                 if (cmbIPV4Protocols.Enabled)
                 {
-                    ipV4Layer.Protocol = (IpV4Protocol)Enum.Parse(typeof(IpV4Protocol), cmbIPV4Protocols.SelectedIndex.ToString());
+                    ipV4Layer.Protocol = (IpV4Protocol)Enum.Parse(typeof(IpV4Protocol), cmbIPV4Protocols.SelectedItem.ToString());
                 }
                 mainForm.addToPacket(ipV4Layer, "IPv4 -> " + netSourceIP.Text + " -> " + netDestIP.Text);
-
             }
             catch (Exception)
             {

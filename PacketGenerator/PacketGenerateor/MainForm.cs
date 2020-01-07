@@ -25,11 +25,20 @@ namespace PacketGenerateor
         private List<Button> transport;
         private List<Button> applications;
         private PacketDevice selectedDevice;
-        private List<Object> packetLayers;
+        private List<Layer> packetLayers;
+        private PacketCommunicator communicator;
+
         public MainForm()
         {
-            packetLayers = new List<object>();
+            packetLayers = new List<Layer>();
+           
             InitializeComponent();
+            foreach (var item in Enum.GetNames(typeof(EthernetType)))
+            {
+                cmbEthType.Items.Add(item);
+            }
+            cmbEthType.SelectedIndex = 1;
+            refreshAdapters();
             tabControl1.TabPages.Clear();
             addEthernetLayer();
         }
@@ -39,7 +48,8 @@ namespace PacketGenerateor
             EthernetLayer ethernetLayer = new EthernetLayer
             {
                 Source = new MacAddress(ethSourceAddr.Text),
-                Destination = new MacAddress(ethDestAddr.Text)
+                Destination = new MacAddress(ethDestAddr.Text),
+                EtherType = (EthernetType)Enum.Parse(typeof(EthernetType), cmbEthType.SelectedItem.ToString()),
             };
             packetLayers.Add(ethernetLayer);
             listPacketLayers.Items.Add("ETH -> " + ethernetLayer.ToString());
@@ -62,6 +72,11 @@ namespace PacketGenerateor
 
         private void btnListDevices_Click(object sender, EventArgs e)
         {
+            refreshAdapters();
+        }
+
+        private void refreshAdapters()
+        {
             allDevices = LivePacketDevice.AllLocalMachine;
 
             if (allDevices.Count == 0)
@@ -69,28 +84,28 @@ namespace PacketGenerateor
                 Console.WriteLine("No interfaces found! Make sure WinPcap is installed.");
                 return;
             }
-
-            // Print the list
+            cmbAdapters.Items.Clear();
             for (int i = 0; i != allDevices.Count; ++i)
             {
                 LivePacketDevice device = allDevices[i];
-                listDevices.Items.Add(device.Description);
+                cmbAdapters.Items.Add(device.Description);
                 if (device.Description != null)
                     Console.WriteLine(" (" + device.Description + ")");
                 else
                     Console.WriteLine(" (No description available)");
             }
+            cmbAdapters.SelectedIndex = 0;
         }
 
         private void btnSendPackets_Click(object sender, EventArgs e)
         {
             // Take the selected adapter
-            selectedDevice = allDevices[listDevices.SelectedIndex];
+            //selectedDevice = allDevices[cmbAdapters.SelectedIndex];
 
             // Open the output device
-            using (PacketCommunicator communicator = selectedDevice.Open(100, // name of the device
+            /*using (PacketCommunicator communicator = selectedDevice.Open(100, // name of the device
                                                                          PacketDeviceOpenAttributes.Promiscuous, // promiscuous mode
-                                                                         1000)) // read timeout
+                                                                         1000)) // read timeou`*/
             {
                 // Supposing to be on ethernet, set mac source to 01:01:01:01:01:01
                 MacAddress source = new MacAddress("30:3A:64:69:70:FD");
@@ -162,7 +177,7 @@ namespace PacketGenerateor
         internal void addToPacket(object layer, string v)
         {
             listPacketLayers.Items.Add(v);
-            packetLayers.Add(layer);
+            packetLayers.Add((Layer)layer);
         }
 
         private void btnIPV4_Click(object sender, EventArgs e)
@@ -271,7 +286,7 @@ namespace PacketGenerateor
 
         private void listDevices_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedDevice = allDevices[listDevices.SelectedIndex];
+            selectedDevice = allDevices[cmbAdapters.SelectedIndex];
         }
 
 
@@ -307,20 +322,30 @@ namespace PacketGenerateor
 
         private void btnSetEthernet_Click(object sender, EventArgs e)
         {
-            EthernetLayer ethernetLayer = new EthernetLayer
+            try
             {
-                Source = new MacAddress(ethSourceAddr.Text),
-                Destination = new MacAddress(ethDestAddr.Text)
-            };
-            packetLayers[0] = ethernetLayer;
-            listPacketLayers.Items[0] = ("ETH -> " + ethernetLayer.ToString());
+                EthernetLayer ethernetLayer = new EthernetLayer
+                {
+                    Source = new MacAddress(ethSourceAddr.Text),
+                    Destination = new MacAddress(ethDestAddr.Text),
+                    EtherType = (EthernetType)Enum.Parse(typeof(EthernetType), cmbEthType.SelectedItem.ToString())
+                };
+                packetLayers[0] = ethernetLayer;
+                listPacketLayers.Items[0] = ("ETH -> " + ethernetLayer.ToString());
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid Parameters");
+            }
         }
 
         private void btnRemovePacketLayer_Click(object sender, EventArgs e)
         {
             if(listPacketLayers.SelectedIndex > 0)
             {
+                packetLayers.RemoveAt(listPacketLayers.SelectedIndex);
                 listPacketLayers.Items.RemoveAt(listPacketLayers.SelectedIndex);
+
             }
         }
 
@@ -355,6 +380,132 @@ namespace PacketGenerateor
         }
 
         private void btnTransport_Click(object sender, EventArgs e)
+        {
+            tabControl1.TabPages.Clear();
+            TabPage page = new TabPage("TCP");
+            page.Controls.Add(new TabTCP(this));
+            tabControl1.TabPages.Add(page);
+            TabPage page2 = new TabPage("UDP");
+            page2.Controls.Add(new TabUDP(this));
+            tabControl1.TabPages.Add(page2);
+        }
+
+        private void btnApplication_Click(object sender, EventArgs e)
+        {
+            tabControl1.TabPages.Clear();
+            TabPage page = new TabPage("HTTP");
+            page.Controls.Add(new TabHttp(this));
+            tabControl1.TabPages.Add(page);
+            TabPage page2 = new TabPage("DNS");
+            page2.Controls.Add(new TabDNS(this));
+            tabControl1.TabPages.Add(page2);
+        }
+
+        private void btnSendPacket_Click(object sender, EventArgs e)
+        {
+            
+            try
+            {
+                PacketBuilder builder = new PacketBuilder(packetLayers.ToArray());
+                //MessageBox.Show(packetLayers.ToArray()[0].ToString());
+                communicator.SendPacket(builder.Build(DateTime.Now));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            
+        }
+
+        private void cmbAdapters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedDevice = allDevices[cmbAdapters.SelectedIndex];
+            communicator = selectedDevice.Open(100, // name of the device
+                                                                            PacketDeviceOpenAttributes.Promiscuous, // promiscuous mode
+                                                                            1000);
+        }
+
+        private void btnTLStest_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PacketBuilder builder = new PacketBuilder(new EthernetLayer
+                {
+                    Source = new MacAddress(ethSourceAddr.Text),
+                    Destination = new MacAddress(ethDestAddr.Text),
+                    EtherType = EthernetType.None, // Will be filled automatically.
+                }, new IpV4Layer
+                {
+                    Source = new IpV4Address("192.168.1.1"),
+                    CurrentDestination = new IpV4Address("192.168.1.2"),
+                    Fragmentation = IpV4Fragmentation.None,
+                    HeaderChecksum = null, // Will be filled automatically.
+                    Identification = 123,
+                    Options = IpV4Options.None,
+                    Protocol = null, // Will be filled automatically.
+                    Ttl = 100,
+                    TypeOfService = 0,
+                }, new TcpLayer
+                {
+                    SourcePort = 4050,
+                    DestinationPort = 25,
+                    Checksum = null, // Will be filled automatically.
+                    SequenceNumber = 1,
+                    AcknowledgmentNumber = 50,
+                    ControlBits = TcpControlBits.Acknowledgment,
+                    Window = 100,
+                    UrgentPointer = 0,
+                    Options = TcpOptions.None,
+                }
+                );
+                //MessageBox.Show(packetLayers.ToArray()[0].ToString());
+                communicator.SendPacket(builder.Build(DateTime.Now));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (listPacketLayers.Items.Count !=3)
+            {
+                MessageBox.Show("The packet needs to have ETH, IP and Transport layers before a udp flow can be created.");   
+            } else
+            {
+                UDPFlowForm form = new UDPFlowForm();
+                form.Show();
+                form.Communicator = communicator;
+            }   
+        }
+
+        private void labelIPv4Protocol_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbEthType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ethDestAddr_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ethSourceAddr_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelDestination_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelSource_Click(object sender, EventArgs e)
         {
 
         }

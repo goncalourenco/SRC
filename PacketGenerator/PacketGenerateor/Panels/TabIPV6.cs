@@ -19,7 +19,6 @@ namespace PacketGenerateor.Panels
         public TabIPV6()
         {
             InitializeComponent();
-            
         }
 
         public TabIPV6(MainForm mainForm)

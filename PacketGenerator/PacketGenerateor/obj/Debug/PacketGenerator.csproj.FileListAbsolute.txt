@@ -27,6 +27,7 @@ C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\
 C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.TabIPV6.resources
 C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.TabICMP.resources
 C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.TabIGMP.resources
+<<<<<<< HEAD
 C:\Users\loure\Source\Repos\goncalourenco\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerator.csprojAssemblyReference.cache
 C:\Users\loure\Source\Repos\goncalourenco\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.MainForm.resources
 C:\Users\loure\Source\Repos\goncalourenco\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.TabIGMP.resources
@@ -56,3 +57,12 @@ C:\Users\loure\Source\Repos\goncalourenco\SRC\PacketGenerator\PacketGenerateor\b
 C:\Users\loure\Source\Repos\goncalourenco\SRC\PacketGenerator\PacketGenerateor\bin\Debug\PcapDotNet.Packets.xml
 C:\Users\loure\Source\Repos\goncalourenco\SRC\PacketGenerator\PacketGenerateor\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\loure\Source\Repos\goncalourenco\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerator.csproj.CopyComplete
+=======
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.TabTCP.resources
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.TabUDP.resources
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.TabHttp.resources
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.TabDNS.resources
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.SubPanels.Query.resources
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.Panels.SubPanels.Answer.resources
+C:\Users\Nekki\Desktop\Aulas\Seg Redes\SRC\SRC\PacketGenerator\PacketGenerateor\obj\Debug\PacketGenerateor.UDPFlowForm.resources
+>>>>>>> master

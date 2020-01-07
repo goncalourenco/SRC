@@ -128,7 +128,6 @@
             this.cmbIPV4Protocols.Name = "cmbIPV4Protocols";
             this.cmbIPV4Protocols.Size = new System.Drawing.Size(214, 21);
             this.cmbIPV4Protocols.TabIndex = 36;
-            this.cmbIPV4Protocols.SelectedIndexChanged += new System.EventHandler(this.cmbIPV4Protocols_SelectedIndexChanged);
             // 
             // identification
             // 
