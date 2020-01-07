@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Text;
 using System.Windows.Forms;
 using PacketGenerateor.Panels;
 using PacketGenerator;
@@ -13,6 +14,7 @@ using PcapDotNet.Packets.Arp;
 using PcapDotNet.Packets.Ethernet;
 using PcapDotNet.Packets.Icmp;
 using PcapDotNet.Packets.IpV4;
+using PcapDotNet.Packets.Transport;
 
 namespace PacketGenerateor
 {
@@ -140,7 +142,7 @@ namespace PacketGenerateor
                         communicator.SendPacket(packet);
                     }*/
                 }
-                
+                communicator.SendPacket(createSynPack());
                 communicator.SendPacket(PcapLib.BuildEthernetPacket());
                 communicator.SendPacket(PcapLib.BuildArpPacket());
                 communicator.SendPacket(PcapLib.BuildVLanTaggedFramePacket());
@@ -356,6 +358,64 @@ namespace PacketGenerateor
         {
 
         }
+
+        private Packet createSynPack()
+        {
+            PacketBuilder builder;
+
+            MacAddress macSource = new MacAddress(ethSourceAddr.Text);
+            IpV4Address ipSource = new IpV4Address("127.0.0.1");
+
+            MacAddress macDest = new MacAddress(ethDestAddr.Text);
+            IpV4Address ipDest = new IpV4Address("127.0.0.1");
+
+            //Ethernet
+            EthernetLayer ethernetLayer = new EthernetLayer
+            {
+                Source = macDest,
+                Destination = macDest,
+                EtherType = EthernetType.None
+            };
+
+            //Internet Protocol
+            IpV4Layer ipv4Layer = new IpV4Layer
+            {
+                Source = ipSource,
+                CurrentDestination = ipDest, 
+                Fragmentation = IpV4Fragmentation.None,
+                HeaderChecksum = null,
+                Identification = 1,
+                Options = IpV4Options.None,
+                Protocol = null,
+                Ttl = 100,
+                TypeOfService = 0
+            };
+
+            //Transport
+            TcpLayer tcpLayer = new TcpLayer
+            {
+                SourcePort = 3000,
+                DestinationPort = 2000,
+                Checksum = null,
+                SequenceNumber = 100,
+                AcknowledgmentNumber = 50,
+                ControlBits = TcpControlBits.Synchronize,
+                Window = 1000,
+                UrgentPointer = 0,
+                Options = TcpOptions.None
+            };
+
+            PayloadLayer payloadLayer = new PayloadLayer
+            {
+                Data = new Datagram(Encoding.ASCII.GetBytes("This is a tcp flow"))
+            };
+
+            builder = new PacketBuilder(ethernetLayer, ipv4Layer, tcpLayer, payloadLayer);
+
+            return builder.Build(DateTime.Now);
+        }
+
+  
     }
 
 }
